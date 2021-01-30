@@ -1,0 +1,16 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    defaultConfig {
+        applicationId "br.com.mrocigno.horizonlivemap"
+    }
+}
+
+
+dependencies {
+    implementation project(":core")
+    implementation project(":layers:ui")
+}

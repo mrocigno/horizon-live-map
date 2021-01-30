@@ -1,0 +1,10 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+dependencies {
+    api appDependencies.testing.junit
+    api appDependencies.testing.androidx.junit
+    api appDependencies.testing.androidx.espresso
+}
