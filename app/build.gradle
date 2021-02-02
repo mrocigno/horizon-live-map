@@ -9,8 +9,7 @@ android {
     }
 }
 
-
 dependencies {
     implementation project(":core")
-    implementation project(":layers:ui")
+    implementation project(":features:map")
 }

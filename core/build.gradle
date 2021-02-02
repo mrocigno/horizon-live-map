@@ -8,4 +8,8 @@ dependencies {
     api appDependencies.androidx.appCompact
     api appDependencies.androidx.constraintLayout
     api appDependencies.material
+
+    // navigation
+    api appDependencies.androidx.navigation.fragment
+    api appDependencies.androidx.navigation.ui
 }

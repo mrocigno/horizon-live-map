@@ -1,9 +1,14 @@
 ext.appDependencies = [
         material: 'com.google.android.material:material:1.2.1',
+        mapView: 'com.peterlaurence:mapview:2.1.5',
         androidx: [
                 core: 'androidx.core:core-ktx:1.3.2',
                 appCompact: 'androidx.appcompat:appcompat:1.2.0',
-                constraintLayout: 'androidx.constraintlayout:constraintlayout:2.0.4'
+                constraintLayout: 'androidx.constraintlayout:constraintlayout:2.0.4',
+                navigation: [
+                        fragment: 'androidx.navigation:navigation-fragment-ktx:2.3.3',
+                        ui: 'androidx.navigation:navigation-ui-ktx:2.3.3'
+                ]
         ],
         testing: [
                 junit: 'junit:junit:4.+',

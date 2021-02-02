@@ -12,8 +12,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core" />
-            <option value="$PROJECT_DIR$/layers" />
-            <option value="$PROJECT_DIR$/layers/ui" />
+            <option value="$PROJECT_DIR$/features" />
+            <option value="$PROJECT_DIR$/features/map" />
             <option value="$PROJECT_DIR$/test" />
             <option value="$PROJECT_DIR$/ui" />
           </set>
