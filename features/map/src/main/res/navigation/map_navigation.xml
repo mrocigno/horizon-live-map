@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mapFragment"
-        android:name="br.com.mrocigno.horizonlivemap.map.MapFragment"
+        android:name="br.com.mrocigno.horizonlivemap.map.ui.map.pages.MapFragment"
         android:label="MapFragment"
         tools:layout="@layout/fragment_map"/>
 

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--region borders-->
+    <item
+        android:width="@dimen/map_gradient_size"
+        android:gravity="left"
+        android:bottom="@dimen/map_gradient_size"
+        android:top="@dimen/map_gradient_size">
+
+        <shape android:shape="rectangle">
+            <gradient android:startColor="@color/black_menu_gradient" />
+        </shape>
+
+    </item>
+
+    <item
+        android:width="@dimen/map_gradient_size"
+        android:gravity="right"
+        android:bottom="@dimen/map_gradient_size"
+        android:top="@dimen/map_gradient_size">
+
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="@color/black_menu_gradient"
+                android:angle="180"/>
+        </shape>
+
+    </item>
+
+    <item
+        android:height="@dimen/map_gradient_size"
+        android:gravity="bottom"
+        android:left="@dimen/map_gradient_size"
+        android:right="@dimen/map_gradient_size">
+
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="@color/black_menu_gradient"
+                android:angle="90"/>
+        </shape>
+    </item>
+
+    <item
+        android:height="@dimen/map_gradient_size"
+        android:left="@dimen/map_gradient_size"
+        android:right="@dimen/map_gradient_size">
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="@color/black_menu_gradient"
+                android:angle="-90"/>
+
+        </shape>
+    </item>
+    <!--endregion-->
+
+    <!--region Corners-->
+    <item
+        android:width="@dimen/map_gradient_size"
+        android:height="@dimen/map_gradient_size"
+        android:gravity="bottom">
+
+        <shape android:shape="rectangle">
+            <gradient
+                android:endColor="@color/black_menu_gradient"
+                android:type="radial"
+                android:gradientRadius="100%"
+                android:centerX="1"
+                android:centerY="0"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:width="@dimen/map_gradient_size"
+        android:height="@dimen/map_gradient_size"
+        android:gravity="bottom|right">
+
+        <shape android:shape="rectangle">
+            <gradient
+                android:endColor="@color/black_menu_gradient"
+                android:type="radial"
+                android:gradientRadius="100%"
+                android:centerX="0"
+                android:centerY="0"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:width="@dimen/map_gradient_size"
+        android:height="@dimen/map_gradient_size"
+        android:gravity="top">
+
+        <shape android:shape="rectangle">
+            <gradient
+                android:endColor="@color/black_menu_gradient"
+                android:type="radial"
+                android:gradientRadius="100%"
+                android:centerX="1"
+                android:centerY="1"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:width="@dimen/map_gradient_size"
+        android:height="@dimen/map_gradient_size"
+        android:gravity="top|right">
+
+        <shape android:shape="rectangle">
+            <gradient
+                android:endColor="@color/black_menu_gradient"
+                android:type="radial"
+                android:gradientRadius="100%"
+                android:centerX="0"
+                android:centerY="1"/>
+
+        </shape>
+
+    </item>
+    <!--endregion-->
+
+</layer-list>
+

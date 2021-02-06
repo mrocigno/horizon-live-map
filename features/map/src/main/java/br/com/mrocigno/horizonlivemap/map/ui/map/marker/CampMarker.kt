@@ -1,4 +1,4 @@
-package br.com.mrocigno.horizonlivemap.map.marker
+package br.com.mrocigno.horizonlivemap.map.ui.map.marker
 
 import android.content.Context
 import android.util.AttributeSet

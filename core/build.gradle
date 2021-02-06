@@ -12,4 +12,8 @@ dependencies {
     // navigation
     api appDependencies.androidx.navigation.fragment
     api appDependencies.androidx.navigation.ui
+
+    // fofo's lib
+    api appDependencies.archtoolkit.delegate
+    api appDependencies.archtoolkit.adapter
 }

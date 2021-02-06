@@ -2,7 +2,7 @@ ext.appDependencies = [
         material: 'com.google.android.material:material:1.2.1',
         mapView: 'com.peterlaurence:mapview:2.1.5',
         androidx: [
-                core: 'androidx.core:core-ktx:1.3.2',
+                core: 'androidx.core:core-ktx:1.5.0-alpha02',
                 appCompact: 'androidx.appcompat:appcompat:1.2.0',
                 constraintLayout: 'androidx.constraintlayout:constraintlayout:2.0.4',
                 navigation: [
@@ -16,5 +16,9 @@ ext.appDependencies = [
                         junit: 'androidx.test.ext:junit:1.1.2',
                         espresso: 'androidx.test.espresso:espresso-core:3.3.0'
                 ]
+        ],
+        archtoolkit: [
+                delegate: 'br.com.arch.toolkit:delegate:0.8.1',
+                adapter: 'br.com.arch.toolkit:recycler-adapter:0.8.1'
         ]
 ]
