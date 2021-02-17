@@ -71,13 +71,13 @@ class MapFragment : Fragment(R.layout.fragment_map), OnRotateListener {
         config.setMaxScale(10f)
         config.enableRotation()
         mapView.configure(config)
-        mapView.defineBounds(0.0, 0.0, 1.0, 1.0)
+        mapView.defineBounds(0.0, 0.0, 255.0, -255.0)
         val test = CampMarker(requireContext())
         mapView.rotateListener = this
         mapView.addMarker(
             view = test,
-            x = 0.6396484375,
-            y = 0.740234375,
+            x = 157.875,
+            y = -213.5,
         )
         mapView.moveToMarker(test, 3f, true)
         mapView.setMarkerTapListener(object : MarkerTapListener {
