@@ -6,7 +6,7 @@ import androidx.annotation.ColorRes
 import androidx.core.view.WindowCompat
 import br.com.mrocigno.horizonlivemap.core.R
 
-fun Activity.transparentToolbar(@ColorRes toolbarColor: Int = R.color.black_translucent) {
+fun Activity.transparentStatusBar(@ColorRes toolbarColor: Int = R.color.black_translucent) {
     window.run {
         clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)

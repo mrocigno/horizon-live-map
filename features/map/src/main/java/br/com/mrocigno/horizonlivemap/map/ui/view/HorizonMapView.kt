@@ -25,7 +25,6 @@ class HorizonMapView @JvmOverloads constructor(
 
         return super.onRotate(rotationDelta, focusX, focusY)
     }
-
 }
 
 interface OnRotateListener {

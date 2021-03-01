@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="map_gradient_size">50dp</dimen>
+    <dimen name="peek_bottom_sheet">60dp</dimen>
 </resources>

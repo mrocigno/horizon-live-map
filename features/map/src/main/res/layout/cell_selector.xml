@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:parentTag="android.widget.FrameLayout"
-    tools:background="@color/black">
+    tools:background="@color/dark">
 
     <TextView
         android:id="@+id/title"

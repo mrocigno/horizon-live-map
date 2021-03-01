@@ -14,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars"
-        android:background="@color/black"
+        android:background="@color/dark"
         android:importantForAccessibility="no"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
