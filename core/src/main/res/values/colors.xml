@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--  TODO: remove  -->
-    <color name="primary">@color/dark</color>
+    <color name="background">@color/light</color>
+    <color name="text">@color/dark</color>
 
     <color name="dark">#000000</color>
-    <color name="light">#DDDDDD</color>
+    <color name="light">#FFFFFF</color>
     <color name="black_translucent">#80000000</color>
     <color name="black_menu_gradient">#B4000000</color>
     <color name="error">#C30000</color>

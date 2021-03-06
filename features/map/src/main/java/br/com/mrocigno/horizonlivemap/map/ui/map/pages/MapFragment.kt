@@ -1,26 +1,17 @@
 package br.com.mrocigno.horizonlivemap.map.ui.map.pages
 
-import android.content.Context
-import android.graphics.Rect
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.TextView
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.isVisible
-import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentContainerView
 import androidx.transition.Slide
 import androidx.transition.TransitionManager
 import br.com.arch.toolkit.delegate.viewProvider
-import br.com.arch.toolkit.recycler.adapter.ViewBinder
-import br.com.mrocigno.horizonlivemap.core.extensions.gone
-import br.com.mrocigno.horizonlivemap.core.extensions.resetRotation
-import br.com.mrocigno.horizonlivemap.core.extensions.transparentStatusBar
-import br.com.mrocigno.horizonlivemap.core.extensions.visible
+import br.com.mrocigno.horizonlivemap.core.extensions.*
 import br.com.mrocigno.horizonlivemap.core.functions.logD
 import br.com.mrocigno.horizonlivemap.map.R
 import br.com.mrocigno.horizonlivemap.map.ui.map.marker.CampMarker
@@ -31,8 +22,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.peterlaurence.mapview.MapViewConfiguration
 import com.peterlaurence.mapview.api.*
 import com.peterlaurence.mapview.core.TileStreamProvider
-import com.peterlaurence.mapview.layout.GestureLayout
 import com.peterlaurence.mapview.markers.MarkerTapListener
+import kotlin.math.roundToInt
 
 class MapFragment : Fragment(R.layout.fragment_map), OnRotateListener {
 
@@ -41,8 +32,11 @@ class MapFragment : Fragment(R.layout.fragment_map), OnRotateListener {
     private val rotateBase: View by viewProvider(R.id.rotate_base)
     private val lock: View by viewProvider(R.id.lock)
     private val bottomSheet: ViewGroup by viewProvider(R.id.bottom_sheet)
-    private val root: CoordinatorLayout by viewProvider(R.id.root_coordinator)
+    private val root: ViewGroup by viewProvider(R.id.root)
     private val appBar: AppBarLayout by viewProvider(R.id.app_bar)
+
+    private val headerContainer: FragmentContainerView by viewProvider(R.id.header_container)
+    private val contentContainer: FragmentContainerView by viewProvider(R.id.content_container)
     private lateinit var behavior: BottomSheetBehavior<ViewGroup>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -87,9 +81,35 @@ class MapFragment : Fragment(R.layout.fragment_map), OnRotateListener {
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                if (behavior.state in 1..2 && slideOffset > .8f && !loopBreaker) {
+                if (behavior.state in 1..2 && slideOffset > .5f && !loopBreaker) {
                     appBar.show()
                     loopBreaker = true
+                }
+                when (slideOffset) {
+                    in -1f..0f -> {
+                        headerContainer.alpha = 1f
+                        contentContainer.alpha = 0f
+                    }
+                    in 0f..0.3f -> {
+                        headerContainer.alpha = 1f - (slideOffset * 2)
+                        contentContainer.alpha = slideOffset * 2
+                    }
+                    in 0.4f..1f -> {
+                        headerContainer.alpha = 0f
+                        val ratio = ((slideOffset - .5f) * 2).coerceIn(0f, 1f)
+                        val padding = requireActivity().let {
+                            it.statusBarHeight + it.actionBarHeight
+                        }
+                        with(contentContainer) {
+                            alpha = 1f
+                            setPadding(
+                                paddingLeft,
+                                (padding * ratio).roundToInt(),
+                                paddingRight,
+                                paddingBottom
+                            )
+                        }
+                    }
                 }
             }
         })
@@ -120,6 +140,10 @@ class MapFragment : Fragment(R.layout.fragment_map), OnRotateListener {
         mapView.moveToMarker(test, 3f, true)
         mapView.setMarkerTapListener(object : MarkerTapListener {
             override fun onMarkerTap(view: View, x: Int, y: Int) {
+                requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.header_container, BottomSheetHeaderFragment())
+                        .replace(R.id.content_container, BottomSheetContentFragment())
+                        .commit()
                 behavior.state = BottomSheetBehavior.STATE_COLLAPSED
             }
         })
@@ -137,11 +161,14 @@ class MapFragment : Fragment(R.layout.fragment_map), OnRotateListener {
 
     private fun AppBarLayout.show() {
         TransitionManager.beginDelayedTransition(root, Slide(Gravity.TOP))
+        requireActivity().transparentStatusBar(android.R.color.transparent)
+        requireActivity().lightStatusBar(this)
         this.visible()
     }
 
     private fun AppBarLayout.hide() {
         TransitionManager.beginDelayedTransition(root, Slide(Gravity.TOP))
+        requireActivity().transparentStatusBar(R.color.black_menu_gradient)
         this.gone()
     }
 }

@@ -8,7 +8,7 @@
                 android:topLeftRadius="10dp"
                 android:topRightRadius="10dp"/>
 
-            <solid android:color="@color/light"/>
+            <solid android:color="@color/text"/>
         </shape>
     </item>
 
@@ -19,19 +19,20 @@
                 android:topLeftRadius="10dp"
                 android:topRightRadius="10dp"/>
 
-            <gradient
-                android:type="linear"
-                android:startColor="#FFC2641D"
-                android:centerX="90%"
-                android:centerColor="@color/dark"
-                android:endColor="@color/dark"
-                android:angle="90"/>
+            <solid android:color="@color/background"/>
+<!--            <gradient-->
+<!--                android:type="linear"-->
+<!--                android:startColor="#FFC2641D"-->
+<!--                android:centerX="90%"-->
+<!--                android:centerColor="@color/dark"-->
+<!--                android:endColor="@color/dark"-->
+<!--                android:angle="90"/>-->
         </shape>
     </item>
 
     <item android:width="30dp" android:height="5dp" android:gravity="center_horizontal" android:top="15dp">
         <shape android:shape="rectangle">
-            <solid android:color="@color/light"/>
+            <solid android:color="@color/text"/>
             <corners android:radius="10dp"/>
         </shape>
     </item>
