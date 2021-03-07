@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="parallax_translation1">0dp</dimen>
+    <dimen name="parallax_translation2">-120dp</dimen>
+    <dimen name="parallax_translation3">-90dp</dimen>
+    <dimen name="parallax_translation4">-10dp</dimen>
+    <dimen name="parallax_translation5">-60dp</dimen>
+    <dimen name="parallax_translation6">-30dp</dimen>
+</resources>
