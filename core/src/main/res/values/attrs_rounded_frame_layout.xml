@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RoundedFrameLayout">
+        <attr name="rounded_radius" format="dimension"/>
+        <attr name="rounded_top_radius" format="dimension"/>
+        <attr name="rounded_bottom_radius" format="dimension"/>
+        <attr name="rounded_top_left_radius" format="dimension"/>
+        <attr name="rounded_top_right_radius" format="dimension"/>
+        <attr name="rounded_bottom_left_radius" format="dimension"/>
+        <attr name="rounded_bottom_right_radius" format="dimension"/>
+    </declare-styleable>
+</resources>

@@ -160,15 +160,17 @@ class MapFragment : Fragment(R.layout.fragment_map), OnRotateListener {
     }
 
     private fun AppBarLayout.show() {
-        TransitionManager.beginDelayedTransition(root, Slide(Gravity.TOP))
-        requireActivity().transparentStatusBar(android.R.color.transparent)
-        requireActivity().lightStatusBar(this)
-        this.visible()
+//        TransitionManager.beginDelayedTransition(root, Slide(Gravity.TOP))
+//        with(requireActivity()) {
+//            transparentStatusBar(android.R.color.transparent)
+//            if (!isNightMode) lightStatusBar(this@show)
+//        }
+//        this.visible()
     }
 
     private fun AppBarLayout.hide() {
-        TransitionManager.beginDelayedTransition(root, Slide(Gravity.TOP))
-        requireActivity().transparentStatusBar(R.color.black_menu_gradient)
-        this.gone()
+//        TransitionManager.beginDelayedTransition(root, Slide(Gravity.TOP))
+//        requireActivity().transparentStatusBar(R.color.black_menu_gradient)
+//        this.gone()
     }
 }

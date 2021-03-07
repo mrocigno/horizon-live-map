@@ -1,6 +1,7 @@
 package br.com.mrocigno.horizonlivemap.core.extensions
 
 import android.app.Activity
+import android.content.res.Configuration
 import android.graphics.Rect
 import android.os.Build
 import android.util.TypedValue
@@ -19,6 +20,7 @@ fun Activity.transparentStatusBar(@ColorRes toolbarColor: Int = R.color.black_tr
         statusBarColor = getColor(toolbarColor)
     }
 }
+
 fun Activity.lightStatusBar(view: View) {
     window.run {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -29,6 +31,11 @@ fun Activity.lightStatusBar(view: View) {
             view.systemUiVisibility = flags
         }
     }
+}
+
+val Activity.isNightMode: Boolean get() {
+    val nightModeFlags = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+    return nightModeFlags == Configuration.UI_MODE_NIGHT_YES
 }
 
 val Activity.statusBarHeight: Int get() {

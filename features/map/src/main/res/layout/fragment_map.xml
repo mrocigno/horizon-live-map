@@ -9,7 +9,7 @@
         android:id="@+id/map_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/dark"
+        android:background="@color/black"
         tools:background="@color/white" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -38,11 +38,12 @@
 
         <include layout="@layout/fragment_map_overlay" />
 
-        <FrameLayout
+        <br.com.mrocigno.horizonlivemap.core.view.RoundedFrameLayout
             android:id="@+id/bottom_sheet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/menu_background"
+            app:rounded_top_radius="@dimen/bottom_sheet_round"
             app:behavior_hideable="true"
             app:behavior_peekHeight="@dimen/peek_bottom_sheet"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
@@ -58,18 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
-<!--            <FrameLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:fitsSystemWindows="true">-->
-
-<!--                <FrameLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="100dp"-->
-<!--                    android:background="@color/error" />-->
-<!--            </FrameLayout>-->
-
-        </FrameLayout>
+        </br.com.mrocigno.horizonlivemap.core.view.RoundedFrameLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </FrameLayout>

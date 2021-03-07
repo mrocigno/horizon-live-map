@@ -3,4 +3,5 @@
     <dimen name="map_gradient_size">50dp</dimen>
     <dimen name="peek_bottom_sheet">80dp</dimen>
     <dimen name="icon_bottom_sheet">60dp</dimen>
+    <dimen name="bottom_sheet_round">20dp</dimen>
 </resources>
