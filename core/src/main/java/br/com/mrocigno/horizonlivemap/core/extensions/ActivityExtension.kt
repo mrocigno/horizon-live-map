@@ -13,6 +13,8 @@ import androidx.annotation.ColorRes
 import br.com.mrocigno.horizonlivemap.core.R
 
 fun Activity.transparentStatusBar(@ColorRes toolbarColor: Int = R.color.black_translucent) {
+    val color = getColor(toolbarColor)
+    if (window.statusBarColor == color) return
     window.run {
         clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)

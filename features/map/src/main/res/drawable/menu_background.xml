@@ -1,32 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:height="@dimen/bottom_sheet_round"
-        android:gravity="top">
-        <shape android:shape="rectangle" >
-
-            <corners
-                android:topLeftRadius="@dimen/bottom_sheet_round"
-                android:topRightRadius="@dimen/bottom_sheet_round"/>
-
-            <solid android:color="@color/text"/>
-        </shape>
-    </item>
 
     <item android:top="1dp">
         <shape android:shape="rectangle" >
 
-            <corners
-                android:topLeftRadius="@dimen/bottom_sheet_round"
-                android:topRightRadius="@dimen/bottom_sheet_round"/>
-
             <solid android:color="@color/background"/>
-<!--            <gradient-->
-<!--                android:type="linear"-->
-<!--                android:startColor="#FFC2641D"-->
-<!--                android:centerX="90%"-->
-<!--                android:centerColor="@color/dark"-->
-<!--                android:endColor="@color/dark"-->
-<!--                android:angle="90"/>-->
         </shape>
     </item>
 
