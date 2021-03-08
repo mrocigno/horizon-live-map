@@ -25,7 +25,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/image_container_peek_size"
             android:background="@color/error"
-            android:visibility="gone"
+            android:visibility="visible"
+            android:translationY="@dimen/image_container_peek_size"
             app:layout_anchor="@id/bottom_sheet"
             app:layout_dodgeInsetEdges="bottom" />
 

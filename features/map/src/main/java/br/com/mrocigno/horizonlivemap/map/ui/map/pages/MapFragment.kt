@@ -85,10 +85,21 @@ class MapFragment : Fragment(R.layout.fragment_map), OnRotateListener {
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                peekTransforms(bottomSheet)
                 halfExpandedTransforms(bottomSheet)
                 expandedTransforms(bottomSheet)
             }
         })
+    }
+
+    private fun peekTransforms(bottomSheet: View) {
+        val mHeight = bottomSheet.height
+        val frameFixedSize = resources.getDimension(R.dimen.image_container_peek_size)
+        val offset = mHeight - bottomSheet.top
+        val complete = resources.getDimensionPixelOffset(R.dimen.peek_bottom_sheet)
+        val ratio = (offset.toFloat() / complete.toFloat()).coerceIn(0f, 1f)
+
+        imageFrame.translationY = frameFixedSize * (1 - ratio)
     }
 
     private fun halfExpandedTransforms(bottomSheet: View) {
@@ -166,16 +177,12 @@ class MapFragment : Fragment(R.layout.fragment_map), OnRotateListener {
 
     private fun showBottomSheet(visible: Boolean) {
         if (visible) {
-            TransitionManager.beginDelayedTransition(root, Slide(Gravity.BOTTOM))
-            imageFrame.visible()
             behavior.state = BottomSheetBehavior.STATE_COLLAPSED
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.header_container, BottomSheetHeaderFragment())
                 .replace(R.id.content_container, BottomSheetContentFragment())
                 .commit()
         } else {
-            TransitionManager.beginDelayedTransition(root, Slide(Gravity.BOTTOM))
-            imageFrame.gone()
             behavior.state = BottomSheetBehavior.STATE_HIDDEN
         }
     }
@@ -189,32 +196,4 @@ class MapFragment : Fragment(R.layout.fragment_map), OnRotateListener {
         val rotation = rotateIndicator.rotation + radians
         rotateIndicator.rotation = rotation % 360
     }
-
-//    private fun AppBarLayout.show() {
-//        if (!isVisible) {
-//            TransitionManager.beginDelayedTransition(root, Slide(Gravity.TOP).apply {
-//                addTarget(R.id.app_bar)
-//            })
-//            with(requireActivity()) {
-//                transparentStatusBar(android.R.color.transparent)
-//                if (!isNightMode) lightStatusBar(this@show)
-//            }
-//            this.visible()
-//        }
-//    }
-//
-//    var teste = true
-//    private fun AppBarLayout.hide() {
-//        if (teste) {
-//            teste = false
-//            with(requireActivity()){
-//                transparentStatusBar(R.color.black_menu_gradient)
-//                animate()
-//                    .translationYBy(0f)
-//                    .translationY(height.toFloat().unaryMinus())
-//                    .withEndAction { gone(); translationY = 0f; teste = true }
-//                    .start()
-//            }
-//        }
-//    }
 }
