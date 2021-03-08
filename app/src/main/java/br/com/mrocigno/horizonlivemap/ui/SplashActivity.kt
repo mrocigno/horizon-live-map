@@ -20,7 +20,7 @@ class SplashActivity : AppCompatActivity(R.layout.activity_splash) {
             override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) = Unit
 
             override fun onTransitionCompleted(p0: MotionLayout?, state: Int) {
-                if (state == R.id.end) {
+                if (state == R.id.peek) {
                     startActivity(Intent(this@SplashActivity, MapActivity::class.java))
                     finish()
                 }

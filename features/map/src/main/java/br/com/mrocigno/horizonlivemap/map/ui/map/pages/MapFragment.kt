@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.constraintlayout.widget.Guideline
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
@@ -28,7 +30,7 @@ import kotlin.math.roundToInt
 
 private const val HALF_EXPANDED_RATIO = 0.7f
 
-class MapFragment : Fragment(R.layout.fragment_map), OnRotateListener {
+class MapFragment : Fragment(R.layout.fragment_map_2), OnRotateListener {
 
     private val mapView: HorizonMapView by lazy { requireView().findViewById(R.id.map_view) }
     private val rotateIndicator: View by viewProvider(R.id.rotate_indicator)
@@ -36,16 +38,15 @@ class MapFragment : Fragment(R.layout.fragment_map), OnRotateListener {
     private val lock: View by viewProvider(R.id.lock)
     private val bottomSheet: ViewGroup by viewProvider(R.id.bottom_sheet)
     private val imageFrame: ViewGroup by viewProvider(R.id.image_frame)
-    private val root: ViewGroup by viewProvider(R.id.root)
+    private val root: MotionLayout by viewProvider(R.id.root)
+    private val guide: Guideline by viewProvider(R.id.guide)
     private val appBar: AppBarLayout by viewProvider(R.id.app_bar)
 
     private val headerContainer: FragmentContainerView by viewProvider(R.id.header_container)
     private val contentContainer: FragmentContainerView by viewProvider(R.id.content_container)
-    private lateinit var behavior: BottomSheetBehavior<ViewGroup>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        configBottomSheet()
         configMapView()
         rotateBase.setOnClickListener {
             resetMapAngle()
@@ -64,31 +65,6 @@ class MapFragment : Fragment(R.layout.fragment_map), OnRotateListener {
                 mapView.setAngle(rotateIndicator.rotation)
             }
         }
-    }
-
-    private fun configBottomSheet() {
-        behavior = BottomSheetBehavior.from(bottomSheet)
-        behavior.state = BottomSheetBehavior.STATE_HIDDEN
-        behavior.isFitToContents = false
-        behavior.halfExpandedRatio = HALF_EXPANDED_RATIO
-
-        behavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                when (newState) {
-                    BottomSheetBehavior.STATE_HIDDEN -> showBottomSheet(false)
-                    BottomSheetBehavior.STATE_COLLAPSED -> Unit// TODO()
-                    BottomSheetBehavior.STATE_DRAGGING -> Unit
-                    BottomSheetBehavior.STATE_EXPANDED -> Unit
-                    BottomSheetBehavior.STATE_HALF_EXPANDED -> Unit// TODO()
-                    BottomSheetBehavior.STATE_SETTLING -> Unit// TODO()
-                }
-            }
-
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                halfExpandedTransforms(bottomSheet)
-                expandedTransforms(bottomSheet)
-            }
-        })
     }
 
     private fun halfExpandedTransforms(bottomSheet: View) {
@@ -165,19 +141,11 @@ class MapFragment : Fragment(R.layout.fragment_map), OnRotateListener {
     }
 
     private fun showBottomSheet(visible: Boolean) {
-        if (visible) {
-            TransitionManager.beginDelayedTransition(root, Slide(Gravity.BOTTOM))
-            imageFrame.visible()
-            behavior.state = BottomSheetBehavior.STATE_COLLAPSED
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.header_container, BottomSheetHeaderFragment())
-                .replace(R.id.content_container, BottomSheetContentFragment())
-                .commit()
-        } else {
-            TransitionManager.beginDelayedTransition(root, Slide(Gravity.BOTTOM))
-            imageFrame.gone()
-            behavior.state = BottomSheetBehavior.STATE_HIDDEN
-        }
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.header_container, BottomSheetHeaderFragment())
+            .replace(R.id.content_container, BottomSheetContentFragment())
+            .commit()
+        root.transitionToState(R.id.peek)
     }
 
     override fun onDestroy() {
