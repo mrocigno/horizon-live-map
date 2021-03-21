@@ -20,25 +20,25 @@
 
         <include layout="@layout/fragment_map_overlay" />
 
-        <FrameLayout
-            android:id="@+id/image_frame"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/image_recycler"
             android:layout_width="match_parent"
             android:layout_height="@dimen/image_container_peek_size"
-            android:background="@color/error"
             android:visibility="visible"
-            android:translationY="@dimen/image_container_peek_size"
-            app:layout_anchor="@id/bottom_sheet"
-            app:layout_dodgeInsetEdges="bottom" />
+            android:background="?colorControlNormal"
+            android:translationY="100dp"
+            android:layout_gravity="top"
+            app:layout_anchor="@id/bottom_sheet"/>
 
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/bottom_sheet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/menu_background"
+            android:orientation="vertical"
             app:behavior_hideable="true"
             app:behavior_peekHeight="@dimen/peek_bottom_sheet"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-            app:layout_insetEdge="bottom">
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/header_container"
@@ -48,10 +48,9 @@
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/content_container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:alpha="1.0" />
+                android:layout_height="match_parent" />
 
-        </FrameLayout>
+        </LinearLayout>
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
@@ -59,7 +58,7 @@
             android:layout_height="wrap_content"
             android:background="?attr/colorControlNormal"
             android:fitsSystemWindows="true"
-            android:translationY="-100dp"
+            android:translationY="-200dp"
             app:elevation="0dp">
 
             <androidx.appcompat.widget.Toolbar

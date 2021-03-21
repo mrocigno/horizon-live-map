@@ -23,14 +23,12 @@ fun Activity.transparentStatusBar(@ColorRes toolbarColor: Int = R.color.black_tr
     }
 }
 
-fun Activity.lightStatusBar(view: View) {
+fun Activity.lightStatusBar(view: View, light: Boolean = true) {
     window.run {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            insetsController?.setSystemBarsAppearance(WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS, WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+            if (light) insetsController?.setSystemBarsAppearance(WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS, WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
         } else {
-            var flags: Int = view.systemUiVisibility
-            flags = flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-            view.systemUiVisibility = flags
+            view.systemUiVisibility = if (light) View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR else 0
         }
     }
 }
