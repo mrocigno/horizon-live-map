@@ -37,7 +37,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="@dimen/spacing_medium"
-        android:src="@drawable/ic_rost"
+        android:src="@drawable/ic_flag"
         android:importantForAccessibility="no"/>
 
 

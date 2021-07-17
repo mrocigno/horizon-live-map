@@ -4,6 +4,8 @@ plugins {
 }
 
 dependencies {
+    api appDependencies.coroutines
+    api appDependencies.koin
     api appDependencies.androidx.core
     api appDependencies.androidx.appCompact
     api appDependencies.androidx.constraintLayout
@@ -16,4 +18,6 @@ dependencies {
     // fofo's lib
     api appDependencies.archtoolkit.delegate
     api appDependencies.archtoolkit.adapter
+
+    implementation appDependencies.picasso
 }

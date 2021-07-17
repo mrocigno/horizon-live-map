@@ -1,10 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?colorControlNormal"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:text="hasu iush disah duisahdui shd asi d diahs iudsauihdu isah uishduisahuidh asuidh uaishduisahduiashduisa hdui sah duiashdui ashdui asuidh asuidhasuidhuasihduias hduis udhasuid hasuidhasuid asuihduiashduiashdiuashdui ashdui ashdui ahs ddahsuihasu iush disah duisahdui shd asi d diahs iudsauihdu isah uishduisahuidh asuidh uaishduisahduiashduisa hdui sah duiashdui ashdui asuidh asuidhasuidhuasihduias hduis udhasuid hasuidhasuid asuihduiashduiashdiuashdui ashdui ashdui ahs ddahsuihasu iush disah duisahdui shd asi d diahs iudsauihdu isah uishduisahuidh asuidh uaishduisahduiashduisa hdui sah duiashdui ashdui asuidh asuidhasuidhuasihduias hduis udhasuid hasuidhasuid asuihduiashduiashdiuashdui ashdui ashdui ahs ddahsuihasu iush disah duisahdui shd asi d diahs iudsauihdu isah uishduisahuidh asuidh uaishduisahduiashduisa hdui sah duiashdui ashdui asuidh asuidhasuidhuasihduias hduis udhasuid hasuidhasuid asuihduiashduiashdiuashdui ashdui ashdui ahs ddahsuihasu iush disah duisahdui shd asi d diahs iudsauihdu isah uishduisahuidh asuidh uaishduisahduiashduisa hdui sah duiashdui ashdui asuidh asuidhasuidhuasihduias hduis udhasuid hasuidhasuid asuihduiashduiashdiuashdui ashdui ashdui ahs ddahsui"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorControlNormal"
+        app:elevation="0dp">
+
+        <com.google.android.material.tabs.TabLayout
+            android:layout_width="match_parent"
+            android:background="?attr/colorControlNormal"
+            app:tabIndicatorColor="?android:attr/textColorPrimary"
+            app:tabSelectedTextColor="?android:attr/textColorPrimary"
+            app:tabTextColor="?android:attr/textColorPrimary"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Teste1"/>
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Teste2"/>
+
+        </com.google.android.material.tabs.TabLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

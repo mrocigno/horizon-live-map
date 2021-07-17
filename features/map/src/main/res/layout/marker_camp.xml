@@ -5,10 +5,26 @@
     android:layout_height="wrap_content"
     tools:parentTag="android.widget.FrameLayout">
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/loading_frame"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_flag"
+            android:importantForAccessibility="no"/>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <ImageView
+        android:id="@+id/marker_icon"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/ic_rost"
+        android:scaleType="fitCenter"
+        tools:src="@drawable/ic_flag"
         android:importantForAccessibility="no"/>
 
 </merge>

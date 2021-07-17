@@ -5,6 +5,11 @@
     <application>
 
         <activity android:name=".ui.map.MapActivity"/>
+
+        <provider
+            android:authorities="MAP_INITIALIZATION"
+            android:name=".ui.MapInitialization"
+            android:exported="false"/>
     </application>
 
 </manifest>

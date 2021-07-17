@@ -18,32 +18,24 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/app_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorControlNormal"
-            android:fitsSystemWindows="true"
-            android:visibility="gone">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="5dp"
-                app:navigationIcon="@drawable/ic_back"
-                app:title="Title" />
-
-        </com.google.android.material.appbar.AppBarLayout>
-
         <include layout="@layout/fragment_map_overlay" />
 
-        <br.com.mrocigno.horizonlivemap.core.view.RoundedFrameLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/image_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/image_container_peek_size"
+            android:visibility="visible"
+            android:background="?colorControlNormal"
+            android:translationY="100dp"
+            android:layout_gravity="top"
+            app:layout_anchor="@id/bottom_sheet"/>
+
+        <LinearLayout
             android:id="@+id/bottom_sheet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/menu_background"
-            app:rounded_top_radius="@dimen/bottom_sheet_round"
+            android:orientation="vertical"
             app:behavior_hideable="true"
             app:behavior_peekHeight="@dimen/peek_bottom_sheet"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
@@ -51,15 +43,32 @@
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/header_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/content_container"
-                android:alpha="1.0"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
-        </br.com.mrocigno.horizonlivemap.core.view.RoundedFrameLayout>
+        </LinearLayout>
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorControlNormal"
+            android:fitsSystemWindows="true"
+            android:translationY="-200dp"
+            app:elevation="0dp">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:navigationIcon="@drawable/ic_back"
+                app:title="Title" />
+
+        </com.google.android.material.appbar.AppBarLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </FrameLayout>
