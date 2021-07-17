@@ -41,8 +41,12 @@ allprojects {
 
             buildTypes {
                 release {
+                    buildConfigField "String", "BASE_URL", "https://horizon-live-map-admin.vercel.app"
                     minifyEnabled false
                     proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+                }
+                debug {
+                    buildConfigField "String", "BASE_URL", "\"https://horizon-live-map-admin.vercel.app\""
                 }
             }
             compileOptions {

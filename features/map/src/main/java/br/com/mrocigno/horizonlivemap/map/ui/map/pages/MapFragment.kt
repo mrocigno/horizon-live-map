@@ -1,6 +1,7 @@
 package br.com.mrocigno.horizonlivemap.map.ui.map.pages
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.View
@@ -19,16 +20,25 @@ import br.com.arch.toolkit.delegate.viewProvider
 import br.com.arch.toolkit.recycler.adapter.SimpleAdapter
 import br.com.arch.toolkit.recycler.adapter.ViewBinder
 import br.com.mrocigno.horizonlivemap.core.extensions.*
+import br.com.mrocigno.horizonlivemap.core.functions.baseUrl
+import br.com.mrocigno.horizonlivemap.core.helpers.picasso
 import br.com.mrocigno.horizonlivemap.map.R
 import br.com.mrocigno.horizonlivemap.map.ui.map.marker.CampMarker
 import br.com.mrocigno.horizonlivemap.map.ui.view.HorizonMapView
 import br.com.mrocigno.horizonlivemap.map.ui.view.OnRotateListener
+import br.com.mrocigno.sdk.api.MapDataResponse
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.peterlaurence.mapview.MapViewConfiguration
-import com.peterlaurence.mapview.api.*
+import com.peterlaurence.mapview.api.addMarker
+import com.peterlaurence.mapview.api.enableRotation
+import com.peterlaurence.mapview.api.setAngle
+import com.peterlaurence.mapview.api.setMarkerTapListener
 import com.peterlaurence.mapview.core.TileStreamProvider
 import com.peterlaurence.mapview.markers.MarkerTapListener
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
 import kotlin.math.roundToInt
 
 private const val HALF_EXPANDED_RATIO = 0.7f
@@ -50,6 +60,8 @@ class MapFragment : Fragment(R.layout.fragment_map), OnRotateListener {
     private val contentContainer: FragmentContainerView by viewProvider(R.id.content_container)
     private lateinit var behavior: BottomSheetBehavior<ViewGroup>
 
+    private val mapViewModel: MapViewModel by viewModel()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         configView()
@@ -64,6 +76,22 @@ class MapFragment : Fragment(R.layout.fragment_map), OnRotateListener {
             resetMapAngle()
             true
         }
+        mapViewModel.teste.collect {
+            empty {
+                val i = 10
+            }
+            loading {
+                val i = 10
+            }
+            data {
+                addMarkers(it)
+            }
+            error {
+                it.printStackTrace()
+                val i = 10
+            }
+        }
+        mapViewModel.testee()
     }
 
     private fun resetMapAngle() {
@@ -166,33 +194,46 @@ class MapFragment : Fragment(R.layout.fragment_map), OnRotateListener {
 
     private fun configMapView() {
         val tilesProvider = TileStreamProvider { row, col, zoomLvl ->
-            requireActivity().assets.open("tiles/$zoomLvl/$row/${col}.jpg")
+//            null
+            picasso(baseUrl("tiles/$zoomLvl/$row/${col}.webp")).getCached()?.let { bmp ->
+                ByteArrayOutputStream().let { bos ->
+                    bmp.compress(Bitmap.CompressFormat.WEBP, 100, bos)
+                    ByteArrayInputStream(bos.toByteArray())
+                }
+            }
         }
         val config = MapViewConfiguration(
-            levelCount = 4,
-            fullWidth = 4096,
-            fullHeight = 4096,
-            tileSize = 256,
+            levelCount = 5,
+            fullWidth = 8000,
+            fullHeight = 8000,
+            tileSize = 250,
             tileStreamProvider = tilesProvider
         )
         config.setMaxScale(10f)
+        config.setWorkerCount(60)
         config.enableRotation()
         mapView.configure(config)
-        mapView.defineBounds(0.0, 0.0, 255.0, -255.0)
-        val test = CampMarker(requireContext())
+        mapView.defineBounds(0.0, 0.0, 500.0, -500.0)
         mapView.rotateListener = this
-        mapView.addMarker(
-            view = test,
-            x = 157.875,
-            y = -213.5,
-        )
-        mapView.moveToMarker(test, 3f, true)
-        mapView.setMarkerTapListener(object : MarkerTapListener {
-            override fun onMarkerTap(view: View, x: Int, y: Int) {
-                showBottomSheet(true)
-                imageAdapter.setList(listOf("1", "4", "3"))
-            }
+
+        mapView.setMarkerTapListener(MarkerOnClickListener { view, x, y ->
+            showBottomSheet(true)
+            imageAdapter.setList(listOf("1", "4", "3"))
         })
+    }
+
+    fun addMarkers(list: List<MapDataResponse>) {
+        list.forEach {
+            val test = CampMarker(
+                context = requireContext(),
+                markerData = it.marker
+            )
+            mapView.addMarker(
+                view = test,
+                x = it.marker.position[1],
+                y = it.marker.position[0]
+            )
+        }
     }
 
     private fun showBottomSheet(visible: Boolean) {
@@ -241,3 +282,5 @@ class ImageItem @JvmOverloads constructor(
         else -> setImageDrawable(ContextCompat.getDrawable(context, R.drawable.trash_4))
     }
 }
+
+fun interface MarkerOnClickListener : MarkerTapListener
