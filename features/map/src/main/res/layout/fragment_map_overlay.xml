@@ -1,48 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/overlay_root"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/overlay_root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/map_gradient" />
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <FrameLayout
-        android:id="@+id/rotate_base"
-        android:layout_gravity="top|end"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_margin="@dimen/spacing_medium"
-        android:background="@drawable/ic_button">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black_menu_gradient"
+        android:padding="@dimen/spacing_s">
 
-        <ImageView
-            android:id="@+id/rotate_indicator"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center_horizontal"
-            android:importantForAccessibility="no"
-            android:src="@drawable/ic_compass_obstructed"
-            android:transformPivotX="12dp"
-            android:transformPivotY="17dp" />
-
-        <ImageView
-            android:id="@+id/lock"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="bottom"
-            android:alpha="100"
-            android:importantForAccessibility="no"
-            android:src="@drawable/ic_lock"
-            android:visibility="gone"
-            app:tint="@color/error"
-            tools:tint="@color/error"
-            tools:visibility="visible" />
+        <br.com.mrocigno.toolbar.ToolbarMapView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </FrameLayout>
 
-</FrameLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/map_gradient" />
+
+        <FrameLayout
+            android:id="@+id/rotate_base"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleX=".8"
+            android:scaleY=".8"
+            android:layout_gravity="top|end"
+            android:layout_margin="@dimen/spacing_s"
+            android:background="@drawable/ic_button">
+
+            <ImageView
+                android:id="@+id/rotate_indicator"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_horizontal"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_compass_obstructed"
+                android:transformPivotX="12dp"
+                android:transformPivotY="17dp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/lock"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="bottom"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_lock"
+                android:visibility="gone"
+                android:tint="@color/error"
+                tools:visibility="visible" />
+
+        </FrameLayout>
+    </FrameLayout>
+
+</LinearLayout>

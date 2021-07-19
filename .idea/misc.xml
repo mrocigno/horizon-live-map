@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../../../layout/compose-model-1626569498096.xml" value="0.46062658763759523" />
+        <entry key="../../../../../../layout/compose-model-1626657457734.xml" value="1.0" />
+        <entry key="../../../../../../layout/compose-model-1626665767841.xml" value="0.5388888888888889" />
+        <entry key="../../../../../../layout/custom_preview.xml" value="0.335" />
+        <entry key="components/toolbar/src/main/res/drawable/ic_filter.xml" value="0.3234375" />
+        <entry key="components/toolbar/src/main/res/drawable/ic_menu.xml" value="0.5388888888888889" />
+        <entry key="features/map/src/main/res/drawable/map_gradient.xml" value="0.5388888888888889" />
+        <entry key="features/map/src/main/res/layout/activity_map.xml" value="0.5" />
+        <entry key="features/map/src/main/res/layout/cell_selector.xml" value="0.4981481481481482" />
+        <entry key="features/map/src/main/res/layout/fragment_map.xml" value="0.4039460020768432" />
+        <entry key="features/map/src/main/res/layout/fragment_map_bottom_sheet_header.xml" value="0.4981481481481482" />
+        <entry key="features/map/src/main/res/layout/fragment_map_overlay.xml" value="0.375" />
+      </map>
+    </option>
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="SuppressKotlinCodeStyleNotification">
+    <option name="disableForAll" value="true" />
   </component>
 </project>

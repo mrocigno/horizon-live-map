@@ -7,4 +7,6 @@ dependencies {
     api appDependencies.testing.junit
     api appDependencies.testing.androidx.junit
     api appDependencies.testing.androidx.espresso
+    api appDependencies.testing.androidx.compose
+
 }

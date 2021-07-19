@@ -1,0 +1,4 @@
+<resources>
+    <string name="title_activity_main">My Compose App</string>
+    <string name="title_activity_toolbar_map">ToolbarMap</string>
+</resources>
