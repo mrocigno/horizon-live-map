@@ -14,6 +14,7 @@ import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.arch.toolkit.delegate.viewProvider
@@ -36,6 +37,7 @@ import com.peterlaurence.mapview.api.setAngle
 import com.peterlaurence.mapview.api.setMarkerTapListener
 import com.peterlaurence.mapview.core.TileStreamProvider
 import com.peterlaurence.mapview.markers.MarkerTapListener
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
@@ -76,7 +78,8 @@ class MapFragment : Fragment(R.layout.fragment_map), OnRotateListener {
             resetMapAngle()
             true
         }
-        mapViewModel.teste.collect {
+
+        mapViewModel.teste.collect(lifecycleScope) {
             empty {
                 val i = 10
             }
@@ -194,7 +197,6 @@ class MapFragment : Fragment(R.layout.fragment_map), OnRotateListener {
 
     private fun configMapView() {
         val tilesProvider = TileStreamProvider { row, col, zoomLvl ->
-//            null
             picasso(baseUrl("tiles/$zoomLvl/$row/${col}.webp")).getCached()?.let { bmp ->
                 ByteArrayOutputStream().let { bos ->
                     bmp.compress(Bitmap.CompressFormat.WEBP, 100, bos)
@@ -215,14 +217,13 @@ class MapFragment : Fragment(R.layout.fragment_map), OnRotateListener {
         mapView.configure(config)
         mapView.defineBounds(0.0, 0.0, 500.0, -500.0)
         mapView.rotateListener = this
-
         mapView.setMarkerTapListener(MarkerOnClickListener { view, x, y ->
             showBottomSheet(true)
             imageAdapter.setList(listOf("1", "4", "3"))
         })
     }
 
-    fun addMarkers(list: List<MapDataResponse>) {
+    private fun addMarkers(list: List<MapDataResponse>) {
         list.forEach {
             val test = CampMarker(
                 context = requireContext(),

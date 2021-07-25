@@ -6,6 +6,7 @@ plugins {
 dependencies {
     implementation project(":core")
     implementation project(':sdk')
+    implementation project(':components:toolbar')
 
     implementation appDependencies.mapView
     implementation appDependencies.picasso

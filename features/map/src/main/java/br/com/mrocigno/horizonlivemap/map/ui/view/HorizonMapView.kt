@@ -1,11 +1,8 @@
 package br.com.mrocigno.horizonlivemap.map.ui.view
 
-import android.animation.ValueAnimator
 import android.content.Context
 import android.util.AttributeSet
-import android.view.View
 import com.peterlaurence.mapview.MapView
-import com.peterlaurence.mapview.api.moveToMarker
 import com.peterlaurence.mapview.util.AngleDegree
 import com.peterlaurence.mapview.util.modulo
 
@@ -22,7 +19,6 @@ class HorizonMapView @JvmOverloads constructor(
             val angle: AngleDegree = rotationDelta
             it.onRotate(angle.modulo())
         }
-
         return super.onRotate(rotationDelta, focusX, focusY)
     }
 }
