@@ -13,7 +13,7 @@ data class MapDataResponse (
     val content: String,
     val marker: MarkerResponse,
     val title: String,
-    val id: Long,
+    val id: Int,
     val images: List<Any?>
 )
 

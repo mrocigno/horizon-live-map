@@ -47,6 +47,8 @@ open class ResponseFlow<T> {
 
     protected val stateFlow: MutableStateFlow<RequestState<T>> = MutableStateFlow(RequestState.Initial)
 
+    var value: T? = null
+
     fun collect(
         wrapper: ResponseFlowCollectWrapper<T>.() -> Unit
     ) = collect(collectFlowScope, wrapper)
@@ -68,6 +70,7 @@ open class ResponseFlow<T> {
                 is RequestState.Success -> {
                     actions.onLoadingState?.invoke(false)
                     actions.onDataState?.invoke(it.data)
+                    value = it.data
                 }
                 is RequestState.Error -> {
                     actions.onLoadingState?.invoke(false)

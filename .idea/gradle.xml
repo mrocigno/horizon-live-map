@@ -18,7 +18,6 @@
             <option value="$PROJECT_DIR$/features/map" />
             <option value="$PROJECT_DIR$/sdk" />
             <option value="$PROJECT_DIR$/test" />
-            <option value="$PROJECT_DIR$/ui" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
