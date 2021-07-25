@@ -1,6 +1,5 @@
 rootProject.name = "HorizonLiveMap"
 include ':app'
-include ':ui'
 include ':core'
 include ':test'
 include ':sdk'

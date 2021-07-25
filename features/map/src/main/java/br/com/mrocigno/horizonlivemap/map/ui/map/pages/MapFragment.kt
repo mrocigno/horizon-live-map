@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.compose.animation.fadeOut
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -22,32 +23,28 @@ import br.com.arch.toolkit.recycler.adapter.SimpleAdapter
 import br.com.arch.toolkit.recycler.adapter.ViewBinder
 import br.com.mrocigno.horizonlivemap.core.extensions.*
 import br.com.mrocigno.horizonlivemap.core.functions.baseUrl
+import br.com.mrocigno.horizonlivemap.core.functions.logD
 import br.com.mrocigno.horizonlivemap.core.helpers.picasso
 import br.com.mrocigno.horizonlivemap.map.R
 import br.com.mrocigno.horizonlivemap.map.ui.map.marker.CampMarker
-import br.com.mrocigno.horizonlivemap.map.ui.view.HorizonMapView
-import br.com.mrocigno.horizonlivemap.map.ui.view.OnRotateListener
 import br.com.mrocigno.sdk.api.MapDataResponse
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.peterlaurence.mapview.MapViewConfiguration
-import com.peterlaurence.mapview.api.addMarker
-import com.peterlaurence.mapview.api.enableRotation
-import com.peterlaurence.mapview.api.setAngle
-import com.peterlaurence.mapview.api.setMarkerTapListener
-import com.peterlaurence.mapview.core.TileStreamProvider
-import com.peterlaurence.mapview.markers.MarkerTapListener
-import org.koin.android.ext.android.inject
+import ovh.plrapps.mapview.MapViewConfiguration
+import ovh.plrapps.mapview.core.TileStreamProvider
+import ovh.plrapps.mapview.markers.MarkerTapListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import ovh.plrapps.mapview.MapView
+import ovh.plrapps.mapview.api.*
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import kotlin.math.roundToInt
 
 private const val HALF_EXPANDED_RATIO = 0.7f
 
-class MapFragment : Fragment(R.layout.fragment_map), OnRotateListener {
+class MapFragment : Fragment(R.layout.fragment_map) {
 
-    private val mapView: HorizonMapView by lazy { requireView().findViewById(R.id.map_view) }
+    private val mapView: MapView by lazy { requireView().findViewById(R.id.map_view) }
     private val rotateIndicator: View by viewProvider(R.id.rotate_indicator)
     private val rotateBase: View by viewProvider(R.id.rotate_base)
     private val lock: View by viewProvider(R.id.lock)
@@ -211,16 +208,32 @@ class MapFragment : Fragment(R.layout.fragment_map), OnRotateListener {
             tileSize = 250,
             tileStreamProvider = tilesProvider
         )
-        config.setMaxScale(10f)
+        config.setMaxScale(5f)
         config.setWorkerCount(60)
         config.enableRotation()
         mapView.configure(config)
         mapView.defineBounds(0.0, 0.0, 500.0, -500.0)
-        mapView.rotateListener = this
         mapView.setMarkerTapListener(MarkerOnClickListener { view, x, y ->
             showBottomSheet(true)
             imageAdapter.setList(listOf("1", "4", "3"))
         })
+        mapView.addReferentialListener {
+            onRotate(it.angle)
+            onScale(it.scale)
+        }
+    }
+
+    private fun onRotate(rotation: Float) {
+        rotateIndicator.rotation = rotation
+    }
+
+    private fun onScale(scale: Float) {
+        logD(scale)
+        mapViewModel.teste.value?.forEach {
+            mapView.getMarkerByTag(it.id.toString())?.run {
+                if (scale >= .3f) fadeOut() else fadeIn()
+            }
+        }
     }
 
     private fun addMarkers(list: List<MapDataResponse>) {
@@ -232,7 +245,8 @@ class MapFragment : Fragment(R.layout.fragment_map), OnRotateListener {
             mapView.addMarker(
                 view = test,
                 x = it.marker.position[1],
-                y = it.marker.position[0]
+                y = it.marker.position[0],
+                tag = it.id.toString()
             )
         }
     }
@@ -252,11 +266,6 @@ class MapFragment : Fragment(R.layout.fragment_map), OnRotateListener {
     override fun onDestroy() {
         mapView.destroy()
         super.onDestroy()
-    }
-
-    override fun onRotate(radians: Float) {
-        val rotation = rotateIndicator.rotation + radians
-        rotateIndicator.rotation = rotation % 360
     }
 }
 

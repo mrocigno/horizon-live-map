@@ -62,7 +62,6 @@ allprojects {
             }
             composeOptions {
                 kotlinCompilerExtensionVersion versions.androidx.compose
-//                kotlinCompilerVersion '1.4.32'
             }
             defaultConfig {
                 vectorDrawables {
