@@ -11,5 +11,6 @@ android {
 
 dependencies {
     implementation project(":core")
+    implementation project(':sdk')
     implementation project(":features:map")
 }

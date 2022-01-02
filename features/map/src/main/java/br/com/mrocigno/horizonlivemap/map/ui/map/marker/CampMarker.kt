@@ -10,7 +10,7 @@ import br.com.mrocigno.horizonlivemap.core.extensions.gone
 import br.com.mrocigno.horizonlivemap.core.functions.baseUrl
 import br.com.mrocigno.horizonlivemap.core.helpers.load
 import br.com.mrocigno.horizonlivemap.map.R
-import br.com.mrocigno.sdk.api.MarkerResponse
+import br.com.mrocigno.sdk.model.MarkerResponse
 
 class CampMarker @JvmOverloads constructor(
     context: Context,
