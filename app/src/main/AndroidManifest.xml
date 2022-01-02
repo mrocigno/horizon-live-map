@@ -20,6 +20,10 @@
             </intent-filter>
         </activity>
 
+        <provider
+            android:authorities="APP_INITIALIZATION"
+            android:name=".AppInitialization"
+            android:exported="false" />
     </application>
 
 </manifest>

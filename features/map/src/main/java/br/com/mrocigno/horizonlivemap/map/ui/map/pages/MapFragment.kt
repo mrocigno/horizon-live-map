@@ -27,7 +27,7 @@ import br.com.mrocigno.horizonlivemap.core.functions.logD
 import br.com.mrocigno.horizonlivemap.core.helpers.picasso
 import br.com.mrocigno.horizonlivemap.map.R
 import br.com.mrocigno.horizonlivemap.map.ui.map.marker.CampMarker
-import br.com.mrocigno.sdk.api.MapDataResponse
+import br.com.mrocigno.sdk.model.MapDataResponse
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import ovh.plrapps.mapview.MapViewConfiguration
@@ -231,7 +231,7 @@ class MapFragment : Fragment(R.layout.fragment_map) {
         logD(scale)
         mapViewModel.teste.value?.forEach {
             mapView.getMarkerByTag(it.id.toString())?.run {
-                if (scale >= .3f) fadeOut() else fadeIn()
+                if (scale >= it.marker.category.zoomLvl) fadeIn() else fadeOut()
             }
         }
     }

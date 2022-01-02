@@ -1,27 +1,41 @@
 package br.com.mrocigno.sdk
 
+import androidx.room.Room
 import br.com.mrocigno.horizonlivemap.core.helpers.ModuleInitialization
 import br.com.mrocigno.sdk.api.MapApi
+import br.com.mrocigno.sdk.local.AppDatabase
 import br.com.mrocigno.sdk.network.RetrofitFactory
 import br.com.mrocigno.sdk.repository.MapRepository
-import org.koin.core.module.Module
+import br.com.mrocigno.sdk.repository.SyncRepository
+import org.koin.android.ext.android.get
+import org.koin.core.scope.Scope
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
 class SdkInitialization : ModuleInitialization() {
 
     override val module = module {
-        //region Network
+        //region Libs
         single { RetrofitFactory.createClient() }
         single { RetrofitFactory.create(get()) }
+        single { Room.databaseBuilder(get(), AppDatabase::class.java, "horizon-db").build() }
         //endregion
 
         //region Repositories
         single { MapRepository(get()) }
+        single { SyncRepository(get(), get()) }
         //endregion
 
-        single { build(get(), MapApi::class.java) }
+        //region APIs
+        single { buildApi(get(), MapApi::class.java) }
+        //endregion
+
+        //region DAOs
+        single { getDB().mapIconDao() }
+        //endregion
     }
 }
 
-fun <T> build(retrofit: Retrofit, clazz: Class<T>) = retrofit.create(clazz)
+private fun <T> buildApi(retrofit: Retrofit, clazz: Class<T>) = retrofit.create(clazz)
+
+private fun Scope.getDB(): AppDatabase = get()

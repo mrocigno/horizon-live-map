@@ -7,6 +7,7 @@ ext.versions = [
         koin: '3.1.1',
         coroutines: '1.5.1',
         shimmer: '0.5.0',
+        room: '2.3.0',
         androidx: [
                 core: '1.5.0-alpha02',
                 appCompact: '1.2.0',
@@ -77,5 +78,8 @@ ext.appDependencies = [
                         interceptor: "com.squareup.okhttp3:logging-interceptor:$versions.network.okhttp",
                 ]
         ],
-
+        room: [
+                core: "androidx.room:room-ktx:$versions.room",
+                annotationProcessor: "androidx.room:room-compiler:$versions.room"
+        ]
 ]

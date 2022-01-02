@@ -1,6 +1,17 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    defaultConfig {
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/build/schemas")
+            }
+        }
+    }
 }
 
 dependencies {
@@ -10,4 +21,7 @@ dependencies {
     implementation appDependencies.gson.converter
     implementation appDependencies.network.okhttp.core
     implementation appDependencies.network.okhttp.interceptor
+
+    implementation appDependencies.room.core
+    kapt appDependencies.room.annotationProcessor
 }
