@@ -9,6 +9,5 @@
     </style>
     <style name="TextView.Body">
         <item name="android:textSize">@dimen/text_body</item>
-        <item name="android:textStyle">bold</item>
     </style>
 </resources>

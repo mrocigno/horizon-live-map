@@ -8,9 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.compose.animation.fadeOut
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
@@ -23,19 +21,19 @@ import br.com.arch.toolkit.recycler.adapter.SimpleAdapter
 import br.com.arch.toolkit.recycler.adapter.ViewBinder
 import br.com.mrocigno.horizonlivemap.core.extensions.*
 import br.com.mrocigno.horizonlivemap.core.functions.baseUrl
-import br.com.mrocigno.horizonlivemap.core.functions.logD
+import br.com.mrocigno.horizonlivemap.core.helpers.load
 import br.com.mrocigno.horizonlivemap.core.helpers.picasso
 import br.com.mrocigno.horizonlivemap.map.R
 import br.com.mrocigno.horizonlivemap.map.ui.map.marker.CampMarker
-import br.com.mrocigno.sdk.model.MapDataResponse
+import br.com.mrocigno.horizonlivemap.map.ui.map.model.ItemData
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import ovh.plrapps.mapview.MapViewConfiguration
-import ovh.plrapps.mapview.core.TileStreamProvider
-import ovh.plrapps.mapview.markers.MarkerTapListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ovh.plrapps.mapview.MapView
+import ovh.plrapps.mapview.MapViewConfiguration
 import ovh.plrapps.mapview.api.*
+import ovh.plrapps.mapview.core.TileStreamProvider
+import ovh.plrapps.mapview.markers.MarkerTapListener
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import kotlin.math.roundToInt
@@ -76,22 +74,13 @@ class MapFragment : Fragment(R.layout.fragment_map) {
             true
         }
 
-        mapViewModel.teste.collect(lifecycleScope) {
-            empty {
-                val i = 10
-            }
-            loading {
-                val i = 10
-            }
-            data {
-                addMarkers(it)
-            }
+        mapViewModel.mapData.collect(lifecycleScope) {
+            data(::addMarkers)
             error {
                 it.printStackTrace()
-                val i = 10
             }
         }
-        mapViewModel.testee()
+        mapViewModel.getData()
     }
 
     private fun resetMapAngle() {
@@ -166,22 +155,14 @@ class MapFragment : Fragment(R.layout.fragment_map) {
     }
 
     private fun configBottomSheet() {
+        imageRecycler.isEnabled = false
         behavior = BottomSheetBehavior.from(bottomSheet)
         behavior.state = BottomSheetBehavior.STATE_HIDDEN
         behavior.isFitToContents = false
         behavior.halfExpandedRatio = HALF_EXPANDED_RATIO
 
         behavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                when (newState) {
-                    BottomSheetBehavior.STATE_HIDDEN -> showBottomSheet(false)
-                    BottomSheetBehavior.STATE_COLLAPSED -> Unit// TODO()
-                    BottomSheetBehavior.STATE_DRAGGING -> Unit
-                    BottomSheetBehavior.STATE_EXPANDED -> Unit
-                    BottomSheetBehavior.STATE_HALF_EXPANDED -> Unit// TODO()
-                    BottomSheetBehavior.STATE_SETTLING -> Unit// TODO()
-                }
-            }
+            override fun onStateChanged(bottomSheet: View, newState: Int) = Unit
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
                 imageRecycler.bottom = bottomSheet.top
@@ -213,9 +194,10 @@ class MapFragment : Fragment(R.layout.fragment_map) {
         config.enableRotation()
         mapView.configure(config)
         mapView.defineBounds(0.0, 0.0, 500.0, -500.0)
-        mapView.setMarkerTapListener(MarkerOnClickListener { view, x, y ->
-            showBottomSheet(true)
-            imageAdapter.setList(listOf("1", "4", "3"))
+        mapView.setMarkerTapListener(MarkerOnClickListener { view, _, _ ->
+            if (view is CampMarker) {
+                showBottomSheet(view.markerData)
+            }
         })
         mapView.addReferentialListener {
             onRotate(it.angle)
@@ -228,19 +210,18 @@ class MapFragment : Fragment(R.layout.fragment_map) {
     }
 
     private fun onScale(scale: Float) {
-        logD(scale)
-        mapViewModel.teste.value?.forEach {
+        mapViewModel.mapData.value?.forEach {
             mapView.getMarkerByTag(it.id.toString())?.run {
                 if (scale >= it.marker.category.zoomLvl) fadeIn() else fadeOut()
             }
         }
     }
 
-    private fun addMarkers(list: List<MapDataResponse>) {
+    private fun addMarkers(list: List<ItemData>) {
         list.forEach {
             val test = CampMarker(
                 context = requireContext(),
-                markerData = it.marker
+                markerData = it
             )
             mapView.addMarker(
                 view = test,
@@ -251,12 +232,22 @@ class MapFragment : Fragment(R.layout.fragment_map) {
         }
     }
 
-    private fun showBottomSheet(visible: Boolean) {
-        if (visible) {
+    private fun showBottomSheet(data: ItemData?) {
+        if (data != null) {
+            val hasImage = data.images.isNotEmpty()
+            behavior.isFitToContents = !hasImage
+            imageAdapter.setList(data.images)
+            if (behavior.state == BottomSheetBehavior.STATE_HIDDEN) {
+                imageRecycler.isVisible = hasImage
+                imageRecycler.isEnabled = hasImage
+            } else {
+                imageRecycler.isVisibleFade = hasImage
+            }
+
             behavior.state = BottomSheetBehavior.STATE_COLLAPSED
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.header_container, BottomSheetHeaderFragment())
-                .replace(R.id.content_container, BottomSheetContentFragment())
+                .replace(R.id.header_container, BottomSheetHeaderFragment.newInstance(data))
+                .replace(R.id.content_container, BottomSheetContentFragment.newInstance())
                 .commit()
         } else {
             behavior.state = BottomSheetBehavior.STATE_HIDDEN
@@ -285,11 +276,8 @@ class ImageItem @JvmOverloads constructor(
         )
     }
 
-    override fun bind(model: String) = when(model) {
-        "1" -> setImageDrawable(ContextCompat.getDrawable(context, R.drawable.trash_1))
-        "2" -> setImageDrawable(ContextCompat.getDrawable(context, R.drawable.trash_2))
-        "3" -> setImageDrawable(ContextCompat.getDrawable(context, R.drawable.trash_3))
-        else -> setImageDrawable(ContextCompat.getDrawable(context, R.drawable.trash_4))
+    override fun bind(model: String) {
+        load(baseUrl("/places/$model"))
     }
 }
 

@@ -8,6 +8,11 @@ import java.time.Duration
 fun View.gone() { visibility = View.GONE }
 fun View.visible() { visibility = View.VISIBLE }
 fun View.invisible() { visibility = View.INVISIBLE }
+var View.isVisibleFade: Boolean
+    get() = true
+    set(value) {
+        if (value) fadeIn() else fadeOut()
+    }
 
 fun View.setPaddingLeft(padding: Int) {
     setPadding(
@@ -46,18 +51,18 @@ fun View.setPaddingBottom(padding: Int) {
 }
 
 fun View.fadeOut(duration: Long = 300, antiLoop: Boolean = true) {
-    if (antiLoop && (isFocusable || isGone)) return
+    if (antiLoop && (isEnabled || isGone)) return
     animate()
         .alphaBy(1f)
         .alpha(0f)
         .setDuration(duration)
         .withStartAction {
             visible()
-            isFocusable = true
+            isEnabled = true
         }
         .withEndAction {
             gone()
-            isFocusable = false
+            isEnabled = false
         }
         .start()
 }

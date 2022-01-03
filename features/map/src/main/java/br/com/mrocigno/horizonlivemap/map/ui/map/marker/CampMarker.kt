@@ -10,13 +10,13 @@ import br.com.mrocigno.horizonlivemap.core.extensions.gone
 import br.com.mrocigno.horizonlivemap.core.functions.baseUrl
 import br.com.mrocigno.horizonlivemap.core.helpers.load
 import br.com.mrocigno.horizonlivemap.map.R
-import br.com.mrocigno.sdk.model.MarkerResponse
+import br.com.mrocigno.horizonlivemap.map.ui.map.model.ItemData
 
 class CampMarker @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-    markerData: MarkerResponse? = null
+    val markerData: ItemData? = null
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     private val icon: ImageView by viewProvider(R.id.marker_icon)
@@ -25,7 +25,7 @@ class CampMarker @JvmOverloads constructor(
     init {
         inflate(context, R.layout.marker_camp, this)
         markerData?.let {
-            icon.load(baseUrl(it.image)) {
+            icon.load(baseUrl(it.marker.image)) {
                 shimmer.gone()
             }
         }

@@ -6,7 +6,7 @@ data class MapDataResponse (
     val marker: MarkerResponse,
     val title: String,
     val id: Int,
-    val images: List<String?>
+    val images: List<String>
 )
 
 data class MarkerResponse (
