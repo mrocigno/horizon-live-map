@@ -46,6 +46,7 @@ allprojects {
                     buildConfigField "String", "BASE_URL", '"http://10.0.2.2:4000"'
                 }
             }
+
             compileOptions {
                 sourceCompatibility JavaVersion.VERSION_1_8
                 targetCompatibility JavaVersion.VERSION_1_8

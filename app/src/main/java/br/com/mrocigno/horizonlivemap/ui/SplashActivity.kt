@@ -27,9 +27,7 @@ class SplashActivity : AppCompatActivity(R.layout.activity_splash) {
             override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) = Unit
             override fun onTransitionCompleted(p0: MotionLayout?, state: Int) {
                 if (state == R.id.end) {
-                    val intent = Intent(this@SplashActivity, MapActivity::class.java)
-                    val options = ActivityOptions.makeSceneTransitionAnimation(this@SplashActivity).toBundle()
-                    startActivity(intent, options)
+                    startActivity(Intent(this@SplashActivity, MapActivity::class.java))
                     finish()
                 }
             }
