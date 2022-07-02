@@ -1,6 +1,5 @@
 package br.com.mrocigno.horizonlivemap.ui
 
-import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -29,6 +28,7 @@ class SplashActivity : AppCompatActivity(R.layout.activity_splash) {
                 if (state == R.id.end) {
                     startActivity(Intent(this@SplashActivity, MapActivity::class.java))
                     finish()
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                 }
             }
         })
