@@ -4,6 +4,8 @@ plugins {
 }
 
 android {
+    namespace "br.com.mrocigno.horizonlivemap"
+
     defaultConfig {
         applicationId "br.com.mrocigno.horizonlivemap"
     }

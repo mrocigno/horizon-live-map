@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.com.mrocigno.sdk">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:usesCleartextTraffic="true">
 
         <provider
             android:authorities="SDK_INITIALIZATION"
-            android:name=".SdkInitialization"
+            android:name="br.com.mrocigno.sdk.SdkInitialization"
+            android:exported="false" />
+
+        <provider
+            android:authorities="SANDMAN"
+            android:name="br.com.mrocigno.sdk.TheDreaming"
             android:exported="false" />
     </application>
 </manifest>

@@ -23,6 +23,8 @@ import androidx.compose.ui.unit.dp
 import br.com.mrocigno.horizonlivemap.core.compose.functions.dimenRes
 import br.com.mrocigno.horizonlivemap.core.compose.functions.padres
 import br.com.mrocigno.horizonlivemap.core.compose.theme.HorizonLiveMapTheme
+import br.com.mrocigno.horizonlivemap.toolbar.R
+import br.com.mrocigno.horizonlivemap.core.R as CR
 
 class ToolbarMapView @JvmOverloads constructor(
     context: Context,
@@ -54,18 +56,18 @@ fun ToolbarMapComposable() {
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padres(horizontal = R.dimen.spacing_m)
+            modifier = Modifier.padres(horizontal = CR.dimen.spacing_m)
         ) {
             Icon(
                 painter = painterResource(R.drawable.ic_menu),
                 contentDescription = "",
-                modifier = Modifier.padres(end = R.dimen.spacing_m)
+                modifier = Modifier.padres(end = CR.dimen.spacing_m)
             )
             Text(text = "Title", modifier = Modifier.weight(1f))
             Icon(
                 painter = painterResource(id = R.drawable.ic_filter),
                 contentDescription = "",
-                modifier = Modifier.padres(start = R.dimen.spacing_m)
+                modifier = Modifier.padres(start = CR.dimen.spacing_m)
             )
         }
     }

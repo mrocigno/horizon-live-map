@@ -5,6 +5,7 @@ plugins {
 }
 
 android {
+    namespace "br.com.mrocigno.horizonlivemap.map"
     kotlinOptions {
         freeCompilerArgs = ["-Xjvm-default=all"]
     }

@@ -3,6 +3,10 @@ plugins {
     id 'kotlin-android'
 }
 
+android {
+    namespace "br.com.mrocigno.horizonlivemap.toolbar"
+}
+
 dependencies {
     implementation project(":core")
     implementation project(':sdk')

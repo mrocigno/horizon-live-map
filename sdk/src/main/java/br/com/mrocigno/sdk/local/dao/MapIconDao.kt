@@ -10,8 +10,8 @@ import br.com.mrocigno.sdk.local.entity.MapIcon
 interface MapIconDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(data: List<MapIcon>)
+    fun insertAll(data: List<MapIcon>)
 
     @Query("SELECT * FROM MapIcon")
-    suspend fun getAll(): List<MapIcon>
+    fun getAll(): List<MapIcon>
 }

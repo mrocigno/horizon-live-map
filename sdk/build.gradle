@@ -5,6 +5,7 @@ plugins {
 }
 
 android {
+    namespace "br.com.mrocigno.sdk"
     defaultConfig {
         kapt {
             arguments {
@@ -22,6 +23,7 @@ dependencies {
     implementation appDependencies.network.okhttp.core
     implementation appDependencies.network.okhttp.interceptor
 
+    implementation appDependencies.mrocigno.sandman
     implementation appDependencies.room.core
     kapt appDependencies.room.annotationProcessor
 }

@@ -3,6 +3,10 @@ plugins {
     id 'kotlin-android'
 }
 
+android {
+    namespace "br.com.mrocigno.horizonlivemap.test"
+}
+
 dependencies {
     api appDependencies.testing.junit
     api appDependencies.testing.androidx.junit

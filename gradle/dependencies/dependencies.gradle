@@ -1,19 +1,20 @@
 ext.versions = [
-        kotlinVersion: '1.5.10',
+        kotlinVersion: '1.7.20',
 
         material: '1.4.0',
         mapView: '3.1.0',
         picasso: '2.71828',
-        koin: '3.1.1',
-        coroutines: '1.5.1',
+        koin: '3.3.3',
+        coroutines: '1.6.3',
         shimmer: '0.5.0',
-        room: '2.3.0',
+        room: '2.4.1',
         androidx: [
                 core: '1.5.0-alpha02',
                 appCompact: '1.2.0',
                 constraintLayout: '2.0.4',
                 navigation: '2.3.3',
-                compose: '1.0.0-rc02',
+                compose: '1.3.2',
+                composeBom: '2022.12.00',
                 lifecycleRuntime: '2.3.1',
                 activityCompose: '1.3.0-alpha02'
         ],
@@ -29,6 +30,9 @@ ext.versions = [
         network: [
                 retrofit: '2.9.0',
                 okhttp: '4.9.0'
+        ],
+        mrocigno: [
+                sandman: '1.0.0'
         ]
 ]
 
@@ -49,9 +53,11 @@ ext.appDependencies = [
                         ui: "androidx.navigation:navigation-ui-ktx:$versions.androidx.navigation"
                 ],
                 compose: [
-                        ui: "androidx.compose.ui:ui:$versions.androidx.compose",
-                        uiTool: "androidx.compose.ui:ui-tooling:$versions.androidx.compose",
-                        material: "androidx.compose.material:material:$versions.androidx.compose",
+                        bom: "androidx.compose:compose-bom:$versions.androidx.composeBom",
+                        ui: "androidx.compose.ui:ui",
+                        uiTool: "androidx.compose.ui:ui-tooling",
+                        uiToolPreview: "androidx.compose.ui:ui-tooling-preview",
+                        material: "androidx.compose.material:material",
                         activityCompose: "androidx.activity:activity-compose:$versions.androidx.activityCompose",
                 ]
         ],
@@ -60,7 +66,7 @@ ext.appDependencies = [
                 androidx: [
                         junit: "androidx.test.ext:junit:$versions.testing.androidx.junit",
                         espresso: "androidx.test.espresso:espresso-core:$versions.testing.androidx.espresso",
-                        compose: "androidx.compose.ui:ui-test-junit4:$versions.androidx.compose"
+                        compose: "androidx.compose.ui:ui-test-junit4"
                 ]
         ],
         archtoolkit: [
@@ -81,5 +87,8 @@ ext.appDependencies = [
         room: [
                 core: "androidx.room:room-ktx:$versions.room",
                 annotationProcessor: "androidx.room:room-compiler:$versions.room"
+        ],
+        mrocigno: [
+                sandman: "br.com.mrocigno:sandman:$versions.mrocigno.sandman"
         ]
 ]

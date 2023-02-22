@@ -37,6 +37,7 @@ import ovh.plrapps.mapview.markers.MarkerTapListener
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import kotlin.math.roundToInt
+import br.com.mrocigno.horizonlivemap.core.R as CR
 
 private const val HALF_EXPANDED_RATIO = 0.7f
 
@@ -123,7 +124,7 @@ class MapFragment : Fragment(R.layout.fragment_map) {
             }
             ratio in 0.01..0.9 -> {
                 with (requireActivity()) {
-                    transparentStatusBar(R.color.black_menu_gradient)
+                    transparentStatusBar(CR.color.black_menu_gradient)
                     lightStatusBar(appBar, false)
                 }
             }
