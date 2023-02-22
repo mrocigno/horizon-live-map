@@ -24,17 +24,24 @@
             android:id="@+id/image_recycler"
             android:layout_width="match_parent"
             android:layout_height="@dimen/image_container_peek_size"
-            android:visibility="gone"
+            android:layout_gravity="center_horizontal"
             android:background="?colorControlNormal"
+            android:maxWidth="@dimen/max_width"
             android:translationY="100dp"
-            android:layout_gravity="top"
-            app:layout_anchor="@id/bottom_sheet"/>
+            android:visibility="gone"
+            app:layout_anchor="@id/bottom_sheet"
+            app:layout_anchorGravity="center_horizontal"
+            app:layout_behavior="br.com.mrocigno.horizonlivemap.core.helpers.MaxSizeBehavior"
+            tools:translationY="0dp"
+            tools:visibility="visible" />
 
         <LinearLayout
             android:id="@+id/bottom_sheet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
             android:background="@drawable/menu_background"
+            android:maxWidth="@dimen/max_width"
             android:orientation="vertical"
             app:behavior_hideable="true"
             app:behavior_peekHeight="@dimen/peek_bottom_sheet"
@@ -56,10 +63,13 @@
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:background="?attr/colorControlNormal"
             android:fitsSystemWindows="true"
+            android:maxWidth="@dimen/max_width"
             android:translationY="-200dp"
-            app:elevation="0dp">
+            app:elevation="0dp"
+            app:layout_behavior="br.com.mrocigno.horizonlivemap.core.helpers.MaxSizeBehavior">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"

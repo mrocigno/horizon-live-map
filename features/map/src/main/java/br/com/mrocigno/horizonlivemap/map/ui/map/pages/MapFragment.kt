@@ -19,7 +19,16 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.arch.toolkit.delegate.viewProvider
 import br.com.arch.toolkit.recycler.adapter.SimpleAdapter
 import br.com.arch.toolkit.recycler.adapter.ViewBinder
-import br.com.mrocigno.horizonlivemap.core.extensions.*
+import br.com.mrocigno.horizonlivemap.core.extensions.actionBarHeight
+import br.com.mrocigno.horizonlivemap.core.extensions.fadeIn
+import br.com.mrocigno.horizonlivemap.core.extensions.fadeOut
+import br.com.mrocigno.horizonlivemap.core.extensions.isNightMode
+import br.com.mrocigno.horizonlivemap.core.extensions.isVisibleFade
+import br.com.mrocigno.horizonlivemap.core.extensions.lightStatusBar
+import br.com.mrocigno.horizonlivemap.core.extensions.resetRotation
+import br.com.mrocigno.horizonlivemap.core.extensions.setPaddingTop
+import br.com.mrocigno.horizonlivemap.core.extensions.statusBarHeight
+import br.com.mrocigno.horizonlivemap.core.extensions.transparentStatusBar
 import br.com.mrocigno.horizonlivemap.core.functions.baseUrl
 import br.com.mrocigno.horizonlivemap.core.helpers.load
 import br.com.mrocigno.horizonlivemap.core.helpers.picasso
@@ -31,7 +40,11 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ovh.plrapps.mapview.MapView
 import ovh.plrapps.mapview.MapViewConfiguration
-import ovh.plrapps.mapview.api.*
+import ovh.plrapps.mapview.api.addMarker
+import ovh.plrapps.mapview.api.enableRotation
+import ovh.plrapps.mapview.api.getMarkerByTag
+import ovh.plrapps.mapview.api.setAngle
+import ovh.plrapps.mapview.api.setMarkerTapListener
 import ovh.plrapps.mapview.core.TileStreamProvider
 import ovh.plrapps.mapview.markers.MarkerTapListener
 import java.io.ByteArrayInputStream
@@ -110,6 +123,7 @@ class MapFragment : Fragment(R.layout.fragment_map) {
         val complete = peekCompensation - frameSize
         val offset = peekCompensation - bottomSheet.top
         val ratio = (offset / complete).coerceIn(0f, 1f)
+
         imageRecycler.updateLayoutParams<CoordinatorLayout.LayoutParams> {
             val fixedSize = frameFixedSize * (1 - ratio)
             val variableSize = frameSize * ratio
