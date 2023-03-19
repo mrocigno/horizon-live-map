@@ -89,6 +89,11 @@ ext.appDependencies = [
                 annotationProcessor: "androidx.room:room-compiler:$versions.room"
         ],
         mrocigno: [
-                sandman: "br.com.mrocigno:sandman:$versions.mrocigno.sandman"
+                bom:  "br.com.mrocigno:sandman-bom:$versions.mrocigno.sandman",
+                core: "br.com.mrocigno:sandman-core",
+                cain: "br.com.mrocigno:sandman-cain",
+                corinthian: "br.com.mrocigno:sandman-corinthian",
+                matthew: "br.com.mrocigno:sandman-matthew",
+                lucien: "br.com.mrocigno:sandman-lucien",
         ]
 ]

@@ -1,13 +1,14 @@
 package br.com.mrocigno.sdk
 
-import br.com.mrocigno.sandman.TheDreaming
-import br.com.mrocigno.sandman.TheDreamingProvider
-import br.com.mrocigno.sandman.network.NetworkFragment
+import br.com.mrocigno.sandman.core.TheDreamingProvider
+import br.com.mrocigno.sandman.corinthian.addCorinthian
+import br.com.mrocigno.sandman.matthew.addMatthew
+
 
 class TheDreaming : TheDreamingProvider() {
 
-    override fun onCreate(): Boolean {
-        TheDreaming.addNightmare("Corintio") { NetworkFragment() }
-        return super.onCreate()
+    override fun setupTheDreaming() {
+        addCorinthian()
+        addMatthew()
     }
 }

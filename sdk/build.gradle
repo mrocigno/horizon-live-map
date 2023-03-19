@@ -23,7 +23,13 @@ dependencies {
     implementation appDependencies.network.okhttp.core
     implementation appDependencies.network.okhttp.interceptor
 
-    implementation appDependencies.mrocigno.sandman
     implementation appDependencies.room.core
     kapt appDependencies.room.annotationProcessor
+
+    implementation appDependencies.mrocigno.bom
+    implementation appDependencies.mrocigno.core
+    implementation appDependencies.mrocigno.cain
+    implementation appDependencies.mrocigno.corinthian
+    implementation appDependencies.mrocigno.matthew
+    implementation appDependencies.mrocigno.lucien
 }
