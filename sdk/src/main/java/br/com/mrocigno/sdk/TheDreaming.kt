@@ -1,14 +1,15 @@
 package br.com.mrocigno.sdk
 
-import br.com.mrocigno.sandman.core.TheDreamingProvider
-import br.com.mrocigno.sandman.corinthian.addCorinthian
-import br.com.mrocigno.sandman.matthew.addMatthew
+import br.com.mrocigno.bigbrother.core.BigBrotherProvider
+import br.com.mrocigno.bigbrother.log.addLogPage
+import br.com.mrocigno.bigbrother.network.addNetworkPage
 
+class TheDreaming : BigBrotherProvider() {
 
-class TheDreaming : TheDreamingProvider() {
+    override val isEnabled: Boolean = true
 
-    override fun setupTheDreaming() {
-        addCorinthian()
-        addMatthew()
+    override fun setupPages() {
+        addNetworkPage()
+        addLogPage()
     }
 }

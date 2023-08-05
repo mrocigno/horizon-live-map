@@ -1,7 +1,7 @@
 package br.com.mrocigno.sdk.network
 
+import br.com.mrocigno.bigbrother.network.bigBrotherIntercept
 import br.com.mrocigno.horizonlivemap.core.BuildConfig
-import br.com.mrocigno.sandman.corinthian.corinthian
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -14,7 +14,7 @@ object RetrofitFactory {
 
     fun createClient(): OkHttpClient {
         return OkHttpClient.Builder()
-            .corinthian()
+            .bigBrotherIntercept()
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })

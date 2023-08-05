@@ -7,7 +7,7 @@ ext.versions = [
         koin: '3.3.3',
         coroutines: '1.6.3',
         shimmer: '0.5.0',
-        room: '2.4.1',
+        room: '2.5.2',
         androidx: [
                 core: '1.5.0-alpha02',
                 appCompact: '1.2.0',
@@ -25,14 +25,14 @@ ext.versions = [
                         espresso: '3.3.0'
                 ]
         ],
-        archtoolkit: '0.8.1',
+        archtoolkit: '1.0.0-rc-04',
         gson: '2.8.7',
         network: [
                 retrofit: '2.9.0',
                 okhttp: '4.9.0'
         ],
         mrocigno: [
-                sandman: '1.0.0'
+                bigbrother: '0.0.4-SNAPSHOT'
         ]
 ]
 
@@ -70,8 +70,8 @@ ext.appDependencies = [
                 ]
         ],
         archtoolkit: [
-                delegate: "br.com.arch.toolkit:delegate:$versions.archtoolkit",
-                adapter: "br.com.arch.toolkit:recycler-adapter:$versions.archtoolkit"
+                delegate: "io.github.matheus-corregiari:delegate:$versions.archtoolkit",
+                adapter: "io.github.matheus-corregiari:recycler-adapter:$versions.archtoolkit"
         ],
         gson: [
                 core: "com.google.code.gson:gson:$versions.gson",
@@ -85,15 +85,15 @@ ext.appDependencies = [
                 ]
         ],
         room: [
+                runtime: "androidx.room:room-runtime:$versions.room",
                 core: "androidx.room:room-ktx:$versions.room",
                 annotationProcessor: "androidx.room:room-compiler:$versions.room"
         ],
         mrocigno: [
-                bom:  "br.com.mrocigno:sandman-bom:$versions.mrocigno.sandman",
-                core: "br.com.mrocigno:sandman-core",
-                cain: "br.com.mrocigno:sandman-cain",
-                corinthian: "br.com.mrocigno:sandman-corinthian",
-                matthew: "br.com.mrocigno:sandman-matthew",
-                lucien: "br.com.mrocigno:sandman-lucien",
+                core: "io.github.mrocigno:big-brother-core:$versions.mrocigno.bigbrother",
+                cain: "io.github.mrocigno:big-brother-crash",
+                corinthian: "io.github.mrocigno:big-brother-report",
+                matthew: "io.github.mrocigno:big-brother-network",
+                lucien: "io.github.mrocigno:big-brother-log",
         ]
 ]

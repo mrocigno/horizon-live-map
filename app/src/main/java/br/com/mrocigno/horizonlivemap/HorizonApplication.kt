@@ -1,6 +1,7 @@
 package br.com.mrocigno.horizonlivemap
 
 import android.app.Application
+import br.com.mrocigno.bigbrother.core.BigBrother
 import br.com.mrocigno.horizonlivemap.core.helpers.KoinModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -15,5 +16,7 @@ class HorizonApplication : Application() {
             androidContext(this@HorizonApplication)
             modules(KoinModules.modules)
         }
+
+        BigBrother.watch(this)
     }
 }
