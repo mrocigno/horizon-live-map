@@ -32,4 +32,5 @@ dependencies {
     implementation appDependencies.mrocigno.corinthian
     implementation appDependencies.mrocigno.matthew
     implementation appDependencies.mrocigno.lucien
+    implementation appDependencies.mrocigno.database
 }

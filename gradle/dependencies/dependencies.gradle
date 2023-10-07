@@ -32,7 +32,7 @@ ext.versions = [
                 okhttp: '4.9.0'
         ],
         mrocigno: [
-                bigbrother: '0.0.4-SNAPSHOT'
+                bigbrother: '0.0.6-SNAPSHOT'
         ]
 ]
 
@@ -95,5 +95,6 @@ ext.appDependencies = [
                 corinthian: "io.github.mrocigno:big-brother-report",
                 matthew: "io.github.mrocigno:big-brother-network",
                 lucien: "io.github.mrocigno:big-brother-log",
+                database: "io.github.mrocigno:big-brother-database:$versions.mrocigno.bigbrother",
         ]
 ]
